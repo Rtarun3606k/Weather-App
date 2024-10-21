@@ -1,0 +1,77 @@
+.nav,.bg-transperent{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.input{
+
+    background: #dfc9c930;
+}
+
+.custom-select {
+    background-color: transparent;
+    color: inherit;
+    padding: 0.5rem;
+    border: 1px solid #ccc; /* Add a border for visibility */
+    border-radius: 0.25rem; /* Make it rounded */
+    appearance: none; /* Hide the default arrow */
+  }
+  
+  .custom-select option {
+    background-color: #f3f4f6; /* Light background for options */
+    color: #000; /* Ensure text color is visible */
+  }
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    /* opacity: 0.6; */
+  }
+
+.box-shadow-transparent {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.box-shadow-depth {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+                0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.width-full{
+    width: 100%;
+}
+.height-full{
+    height: 100%;
+}
+
+.headings{
+    width: 100%;
+}
+
+.section1{
+    width: 100%;
+    height: 8vh;
+    
+}
+
+.section2{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+.box1{
+    height: 100%;
+    width: 80%;
+}
+.box2{
+    width: 30%;
+    height: 100%;
+    /* flex-direction: row; */
+}

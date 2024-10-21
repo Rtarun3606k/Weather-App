@@ -1,0 +1,8 @@
+.venv
+backend/__pycache__
+backend/migrations
+backend/instance
+backend/email_verification/__pycache__
+backend/Models/__pycache__
+backend/Routes/__pycache__
+frontend/node_modules
