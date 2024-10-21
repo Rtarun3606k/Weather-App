@@ -8,3 +8,7 @@ from Routes.user import user_route
 
 
 app.register_blueprint(user_route,url_prefix="/user")
+
+@app.route("/",methods=["GET"])
+def func():
+    return jsonify({"message":"Hello World"})

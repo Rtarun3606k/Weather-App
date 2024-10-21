@@ -40,7 +40,7 @@ def corn_job():
 
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(corn_job, 'interval', seconds=111111)
+    scheduler.add_job(corn_job, 'interval', seconds=11111)
     scheduler.start()
     print('Scheduler started')
     return scheduler
