@@ -10,7 +10,7 @@ const Nav = () => {
             Home
           </li>
           <li className="hover:text-white transition-all ease-in duration-300">
-            Wind Map
+            Profile
           </li>
           <li className="hover:text-white transition-all ease-in duration-300">
             Contact
