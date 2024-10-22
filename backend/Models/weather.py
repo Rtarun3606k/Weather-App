@@ -44,6 +44,7 @@ class User(db.Model):
 
     # email verified checker
     email_verified = db.Column(db.Boolean, default=False)  
+    alerts = db.Column(db.Boolean, default=True) 
 
     
 

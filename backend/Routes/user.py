@@ -49,11 +49,15 @@ def login():
         return jsonify({'message': 'please fill all the fields'}), 401
 
     user = User.query.filter_by(user_email=user_email).first()
+    if not user:
+        return jsonify({'message': 'invalid email or password'}), 401
     access_token = create_access_token(identity=user.user_id, expires_delta=False)
     if not user or not bcrypt.checkpw(user_password.encode('utf-8'), user.user_password):
         return jsonify({'message': 'invalid email or password'}), 401
 
     return jsonify({'message': 'logged in successfully',"access_token":access_token}), 200
+
+
 
 @user_route.route("/update", methods=["PUT"])
 @jwt_required()
@@ -68,21 +72,20 @@ def update():
     user_email = get_data.get("user_email")
     user_name = get_data.get("user_name")
     user_password = get_data.get("user_password")
-    user_city = get_data.get("user_city")
+    user_city = get_data.get("city")
     user_password_retype = get_data.get("user_password_retype")
-    temperature_alert = get_data.get("temperature_alert")
+    temperature_alert = get_data.get("alert_threshold")
 
-    if not user_email:
-        return jsonify({'message': 'user_email is required'}), 401
-
-    user = User.query.filter_by(user_email=user_email).first()
-    if not user:
-        return jsonify({'message': 'user not found'}), 401
+    if user_email:
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", user_email):
+            return jsonify({'message': 'invalid email'}), 401
+        check_user.user_email = user_email
+        check_user.email_verified = False
 
     if user_name:
         if len(user_name) < 6:
             return jsonify({'message': 'username must be 6 characters or more'}), 401
-        user.user_name = user_name
+        check_user.user_name = user_name
 
     if user_password:
         if user_password != user_password_retype:
@@ -90,15 +93,64 @@ def update():
         if len(user_password) < 6:
             return jsonify({'message': 'password must be 6 characters or more'}), 401
         hashed = bcrypt.hashpw(user_password.encode('utf-8'), bcrypt.gensalt())
-        user.user_password = hashed
-
+        check_user.user_password = hashed
 
     if user_city:
-        user.user_city = user_city
+        check_user.city = user_city
 
     if temperature_alert is not None:
-        user.temperature_alert = temperature_alert
+        check_user.alert_threshold = temperature_alert
 
     db.session.commit()
     return jsonify({'message': 'updated successfully'}), 200
 # so its still showing frontend in vs code i deleted and want  to add 2 folder frrontend and backend they are in one folder called weather app 1 i 
+
+
+@user_route.route("/delete", methods=["DELETE"])
+@jwt_required()
+def delete():
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(user_id=user_id).first()
+
+    if not user:
+        return jsonify({'message': 'user not found'}), 401
+
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({'message': 'deleted successfully'}), 200
+
+
+@user_route.route("/get", methods=["GET"])
+@jwt_required()
+def get():
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(user_id=user_id).first()
+
+    if not user:
+        return jsonify({'message': 'user not found'}), 401
+
+    return jsonify({'user_name': user.user_name, 'user_email': user.user_email, 'user_city': user.city, 'alert_threshold': user.alert_threshold,"email_verified":user.email_verified ,"alerts":user.alerts}), 200
+
+
+@user_route.route("/alerts", methods=["POST"])
+@jwt_required()
+def alerts():
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(user_id=user_id).first()
+
+    if not user:
+        return jsonify({'message': 'user not found'}), 401
+
+   
+    print(user.alerts)
+    
+    if user.alerts:
+        user.alerts = False
+        db.session.commit()
+        return jsonify({'message': 'alert threshold is set off'}), 200
+    elif not user.alerts :
+        user.alerts = True
+        db.session.commit()
+        return jsonify({'message': 'alert threshold is set on'}), 200
+    else:
+        return jsonify({'message': 'invalid alert threshold value'}), 400

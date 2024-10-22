@@ -22,9 +22,9 @@ def send_verification_email():
     user = User.query.filter_by(user_id=user_id).first()
     if not user:
         return jsonify({'message':'user not found'}),401
-    if user.user_email_verified:
+    if user.email_verified:
         return jsonify({'message':'email already verified'}),401
-    flag  = send_email(user.user_name,user.user_email,user.user_id, True)
+    flag  = send_email(user.user_name,user.user_email,user.user_id)
     if flag is None:
         return jsonify({'message':'error in sending email'}),401
     
@@ -36,8 +36,8 @@ def verify_email(id):
     user = User.query.filter_by(user_id=user_id).first()
     if not user:
         return render_template('email_verification_failed.html')
-    if user.user_email_verified:
+    if user.email_verified:
         return render_template('email_already_verified.html')
-    user.user_email_verified = True
+    user.email_verified = True
     db.session.commit()
-    return render_template('email_verification_success.html')
+    return render_template('email_verification_sucess.html')

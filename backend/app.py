@@ -7,9 +7,11 @@ from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 from Models.weather import User
 
 from Routes.user import user_route
+from Routes.email_verification import verification_route
 
 
 app.register_blueprint(user_route,url_prefix="/user")
+app.register_blueprint(verification_route,url_prefix="/verification")
 
 @app.route("/",methods=["GET"])
 def func():

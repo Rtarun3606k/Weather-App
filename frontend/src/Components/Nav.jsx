@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Components.css";
 import { NavLink } from "react-router-dom";
 import { delete_cookies_storedata, get_cookies_data } from "../Utility/Cookies";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
+  const navigate = useNavigate();
   const [flag, setFlag] = useState(false);
   useEffect(() => {
     const cookieData = get_cookies_data(); // Get the cookie data
@@ -12,6 +14,7 @@ const Nav = () => {
 
   const handleLogout = () => {
     delete_cookies_storedata();
+    navigate("/");
     window.location.reload();
   };
 

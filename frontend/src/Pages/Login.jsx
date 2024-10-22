@@ -33,6 +33,7 @@ const Login = () => {
       store_cookies_data(data.access_token);
       console.log(data.access_token);
       navigate("/");
+      window.location.reload();
       //   ToastCoustome({ message: data.message, sucess: true });
     } else {
       console.log(data.message);

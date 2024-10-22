@@ -35,6 +35,7 @@ def send_email(participant_name, to_email, city,temp,desc):
         return None
 
     # Replace placeholders in the HTML template with dynamic data
+    temp = str(temp)
     body = html_template.replace("{user_name}", participant_name).replace("{ city }",city ).replace("{temp}",temp).replace("{desc}",desc)
 
     try:
