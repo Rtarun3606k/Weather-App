@@ -1,10 +1,45 @@
 import React, { useEffect, useState } from "react";
 import "../Components/Components.css";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { store_cookies_data } from "../Utility/Cookies";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [showpassword, setShowpassword] = useState(false);
-  const [Name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
+  const registerUser = async (e) => {
+    e.preventDefault();
+    console.log(apiUrl);
+    console.log(email, password);
+
+    const response = await fetch(`${apiUrl}/user/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_email: email,
+        user_password: password,
+      }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      console.log(data.message);
+      toast.success(data.message);
+      store_cookies_data(data.access_token);
+      console.log(data.access_token);
+      navigate("/");
+      //   ToastCoustome({ message: data.message, sucess: true });
+    } else {
+      console.log(data.message);
+      toast.error(data.message);
+      //   ToastCoustome({ message: data.message, sucess: false });
+    }
+  };
 
   useEffect(() => {}, [showpassword]);
 
@@ -22,15 +57,18 @@ const Login = () => {
           style={{ width: "30%", height: "50%" }}
         >
           <h1 className="text-2xl mb-3">Login</h1>
-          <form className="flex flex-col gap-3 justify-center items-center">
+          <form
+            className="flex flex-col gap-3 justify-center items-center"
+            onSubmit={registerUser}
+          >
             <div className="flex gap-1 flex-col justify-center items-center placeholder-black-500 text-center">
               <label htmlFor="email">Email </label>
               <input
                 type="email"
                 name="email"
                 id="email"
-                value={Name}
-                onChange={(e) => setName(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="bg-transperent input focus:outline-none p-1 rounded-lg  placeholder-black-500 text-center"
               />

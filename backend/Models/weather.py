@@ -1,7 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import time
+from config import db
 
-db = SQLAlchemy()
 
 class RealTimeWeather(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -34,12 +35,12 @@ class User(db.Model):
     
     # User preferences
     preferred_temp_unit = db.Column(db.String(1), nullable=False, default='C')  # 'C' for Celsius, 'F' for Fahrenheit
-    city = db.Column(db.String(500), nullable=False)  # Store city names as a comma-separated string
+    city = db.Column(db.String(500), nullable=True)  # Store city names as a comma-separated string
     alert_threshold = db.Column(db.Float, nullable=True)  # Temperature threshold for alerts
     
     # Timestamps for tracking user creation and updates
-    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+    created_at = db.Column(db.BigInteger, default=lambda: int(time.time()))
+    updated_at = db.Column(db.BigInteger, default=lambda: int(time.time()), onupdate=lambda: int(time.time()))
 
     # email verified checker
     email_verified = db.Column(db.Boolean, default=False)  

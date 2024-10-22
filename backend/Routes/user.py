@@ -14,7 +14,7 @@ def register():
     user_name = get_data.get("user_name")
     user_password = get_data.get("user_password")
     user_password_retype = get_data.get("user_password_retype")
-    user_city = get_data.get("user_city")
+    # user_city = get_data.get("user_city")
 
     if not user_email or not user_password or not user_name:
         return jsonify({'message': 'please fill all the fields'}), 401
@@ -26,9 +26,11 @@ def register():
         return jsonify({'message': 'password must be 6 characters or more'}), 401
     if len(user_name) < 6:
         return jsonify({'message': 'username must be 6 characters or more'}), 401
+    if User.query.filter_by(user_email=user_email).first():
+        return jsonify({'message': 'email already exists'}), 401
 
     hashed = bcrypt.hashpw(user_password.encode('utf-8'), bcrypt.gensalt())
-    new_user = User(user_name=user_name, user_email=user_email, user_password=hashed, user_email_verified=False, user_city=user_city)
+    new_user = User(user_name=user_name, user_email=user_email, user_password=hashed, email_verified=False)
     
     try:
         db.session.add(new_user)
@@ -49,9 +51,9 @@ def login():
     user = User.query.filter_by(user_email=user_email).first()
     access_token = create_access_token(identity=user.user_id, expires_delta=False)
     if not user or not bcrypt.checkpw(user_password.encode('utf-8'), user.user_password):
-        return jsonify({'message': 'invalid email or password',"access_token":access_token}), 401
+        return jsonify({'message': 'invalid email or password'}), 401
 
-    return jsonify({'message': 'logged in successfully'}), 200
+    return jsonify({'message': 'logged in successfully',"access_token":access_token}), 200
 
 @user_route.route("/update", methods=["PUT"])
 @jwt_required()

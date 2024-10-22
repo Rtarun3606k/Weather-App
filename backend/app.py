@@ -4,6 +4,8 @@ from flask_jwt_extended import verify_jwt_in_request, create_access_token, creat
 import jwt
 from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 
+from Models.weather import User
+
 from Routes.user import user_route
 
 
