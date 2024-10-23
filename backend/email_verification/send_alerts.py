@@ -36,7 +36,7 @@ def send_email(participant_name, to_email, city,temp,desc):
 
     # Replace placeholders in the HTML template with dynamic data
     temp = str(temp)
-    body = html_template.replace("{user_name}", participant_name).replace("{ city }",city ).replace("{temp}",temp).replace("{desc}",desc)
+    body = html_template.replace("{ user_name }", participant_name).replace("{ city }",city ).replace("{ temperature }",temp).replace("{ description }",desc)
 
     try:
         # Create a multipart message

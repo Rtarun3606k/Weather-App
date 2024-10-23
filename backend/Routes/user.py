@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from Models.weather import User
+from Models.weather import User,DailySummary,RealTimeWeather
 from config import db
 import bcrypt
 import re
@@ -154,3 +154,93 @@ def alerts():
         return jsonify({'message': 'alert threshold is set on'}), 200
     else:
         return jsonify({'message': 'invalid alert threshold value'}), 400
+    
+
+@user_route.route("/realtime_weather", methods=["POST"])
+def add_realtime_weather():
+    get_data = request.json
+    city_name = get_data.get("city_name")
+    temperature = get_data.get("temperature")
+    feels_like = get_data.get("feels_like")
+    main_condition = get_data.get("main_condition")
+
+    if not city_name or temperature is None or feels_like is None or not main_condition:
+        return jsonify({'message': 'please fill all the fields'}), 401
+
+    new_weather = RealTimeWeather(
+        city_name=city_name,
+        temperature=temperature,
+        feels_like=feels_like,
+        main_condition=main_condition
+    )
+
+    try:
+        db.session.add(new_weather)
+        db.session.commit()
+        return jsonify({"message": 'realtime weather added successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 401
+
+
+@user_route.route("/daily_summary", methods=["POST"])
+def add_daily_summary():
+    get_data = request.json
+    city_name = get_data.get("city_name")
+    date = get_data.get("date")
+    avg_temperature = get_data.get("avg_temperature")
+    max_temperature = get_data.get("max_temperature")
+    min_temperature = get_data.get("min_temperature")
+    dominant_condition = get_data.get("dominant_condition")
+
+    if not city_name or not date or avg_temperature is None or max_temperature is None or min_temperature is None or not dominant_condition:
+        return jsonify({'message': 'please fill all the fields'}), 401
+
+    new_summary = DailySummary(
+        city_name=city_name,
+        date=date,
+        avg_temperature=avg_temperature,
+        max_temperature=max_temperature,
+        min_temperature=min_temperature,
+        dominant_condition=dominant_condition
+    )
+
+    try:
+        db.session.add(new_summary)
+        db.session.commit()
+        return jsonify({"message": 'daily summary added successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 401
+
+
+@user_route.route("/realtime_weather/<int:id>", methods=["GET"])
+def get_realtime_weather(id):
+    weather = RealTimeWeather.query.get(id)
+
+    if not weather:
+        return jsonify({'message': 'realtime weather not found'}), 404
+
+    return jsonify({
+        'city_name': weather.city_name,
+        'temperature': weather.temperature,
+        'feels_like': weather.feels_like,
+        'main_condition': weather.main_condition,
+        'timestamp': weather.timestamp,
+        'alert_triggered': weather.alert_triggered
+    }), 200
+
+
+@user_route.route("/daily_summary/<int:id>", methods=["GET"])
+def get_daily_summary(id):
+    summary = DailySummary.query.get(id)
+
+    if not summary:
+        return jsonify({'message': 'daily summary not found'}), 404
+
+    return jsonify({
+        'city_name': summary.city_name,
+        'date': summary.date,
+        'avg_temperature': summary.avg_temperature,
+        'max_temperature': summary.max_temperature,
+        'min_temperature': summary.min_temperature,
+        'dominant_condition': summary.dominant_condition
+    }), 200
