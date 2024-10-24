@@ -33,6 +33,6 @@ def corn_job():
 
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(corn_job, 'interval', seconds=10)#change the frequency to run corn job eg minutes = 1 or seconds = 2
+    scheduler.add_job(corn_job, 'interval', hours=1)#change the frequency to run corn job eg minutes = 1 or seconds = 2
     scheduler.start()
  

@@ -7,6 +7,7 @@ import Days from "./Days";
 import Pannel from "./Pannel";
 import { get_longitude_latitude } from "../Utility/geoLocation";
 import { GetDateTime } from "../Utility/DateTime";
+import { DailySummary, RealTimeSummary } from "../Utility/UploadData";
 
 const Body = () => {
   const [weather_data, setWeather_data] = useState({});
@@ -96,7 +97,9 @@ const Body = () => {
       });
 
       setWeather_data(data); // Update state with fetched data
+      await DailySummary(data);
       setDaily_weather(Dailydata);
+      await RealTimeSummary(data);
       console.log("Fetched weather data:", data); // Log the data directly after fetching
       console.log("daily Data weather data:", Dailydata); // Log the data directly after fetching
     } catch (error) {
@@ -129,11 +132,11 @@ const Body = () => {
       </video>
       <div className="border-red-500 max-w-full flex justify-center align-middle mb-3">
         <div
-          className="flex flex-col justify-center align-middle mt-5 z-50 cursor-pointer border-1 items-center bg-transperent rounded-xl hover:translate-y-1 ease-in duration-100 px-8 box-shadow-transparent"
+          className="flex flex-col justify-center align-middle mt-5 z-50 cursor-pointer border-1 items-center bg-transperent rounded-xl hover:translate-y-1 ease-in duration-100 px-8 box-shadow-transparent "
           style={{ width: "95%", height: "85vh" }}
         >
-          <div className="section1 mt-5 flex">
-            <ul className="flex items-center justify-between headings">
+          <div className="section1 mt-5 flex ">
+            <ul className="flex items-center justify-between headings ">
               <li className="font-medium">Weather Dashboard</li>
               <li className="flex gap-2 items-center justify-center flex-row-reverse">
                 <p className="font-semibold">

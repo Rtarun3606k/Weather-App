@@ -10,13 +10,13 @@ class RealTimeWeather(db.Model):
     temperature = db.Column(db.Float, nullable=False)
     feels_like = db.Column(db.Float, nullable=False)
     main_condition = db.Column(db.String(50), nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     alert_triggered = db.Column(db.Boolean, default=False)
+    date = db.Column(db.Integer, nullable=False)
 
 class DailySummary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     city_name = db.Column(db.String(50), nullable=False)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.Integer, nullable=False)
     avg_temperature = db.Column(db.Float, nullable=False)
     max_temperature = db.Column(db.Float, nullable=False)
     min_temperature = db.Column(db.Float, nullable=False)

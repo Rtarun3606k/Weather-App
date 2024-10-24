@@ -22,17 +22,44 @@ const Nav = () => {
     <div className="flex justify-center align-middle mt-5 z-50 cursor-pointer relative">
       <nav className="nav flex justify-center align-middle max-w-fit rounded-xl hover:translate-y-1 ease-in duration-100 px-8">
         <ul className="flex gap-16 m-4">
-          <NavLink to="/">
-            <li className="hover:text-white transition-all ease-in duration-300">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? "hover:text-black text-white transition-all ease-in duration-300"
+                : "hover:text-white transition-all ease-in duration-300"
+            }
+          >
+            <li
+              className={({ isActive }) =>
+                isActive
+                  ? "hover:text-black text-white transition-all ease-in duration-300"
+                  : "hover:text-white transition-all ease-in duration-300"
+              }
+            >
               Home
             </li>
           </NavLink>
-          <NavLink to="/profile">
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              isActive
+                ? "hover:text-black text-white transition-all ease-in duration-300"
+                : "hover:text-white transition-all ease-in duration-300"
+            }
+          >
             <li className="hover:text-white transition-all ease-in duration-300">
               Profile
             </li>
           </NavLink>
-          <NavLink to="/contact">
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive
+                ? "hover:text-black text-white transition-all ease-in duration-300"
+                : "hover:text-white transition-all ease-in duration-300"
+            }
+          >
             <li className="hover:text-white transition-all ease-in duration-300">
               Contact
             </li>
@@ -45,7 +72,14 @@ const Nav = () => {
               Logout
             </li>
           ) : (
-            <NavLink to="/login">
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive
+                  ? "hover:text-black text-white transition-all ease-in duration-300"
+                  : "hover:text-white transition-all ease-in duration-300"
+              }
+            >
               <li className="hover:text-white transition-all ease-in duration-300">
                 Login
               </li>

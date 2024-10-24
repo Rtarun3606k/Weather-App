@@ -163,15 +163,17 @@ def add_realtime_weather():
     temperature = get_data.get("temperature")
     feels_like = get_data.get("feels_like")
     main_condition = get_data.get("main_condition")
+    date = get_data.get("date")
 
-    if not city_name or temperature is None or feels_like is None or not main_condition:
+    if not city_name or temperature is None or feels_like is None or not main_condition or date is None:
         return jsonify({'message': 'please fill all the fields'}), 401
 
     new_weather = RealTimeWeather(
         city_name=city_name,
         temperature=temperature,
         feels_like=feels_like,
-        main_condition=main_condition
+        main_condition=main_condition,
+        date = date
     )
 
     try:
@@ -192,9 +194,10 @@ def add_daily_summary():
     min_temperature = get_data.get("min_temperature")
     dominant_condition = get_data.get("dominant_condition")
 
-    if not city_name or not date or avg_temperature is None or max_temperature is None or min_temperature is None or not dominant_condition:
+    print(city_name,date,avg_temperature,max_temperature,min_temperature,dominant_condition)
+    if not city_name or date is None or avg_temperature is None or max_temperature is None or min_temperature is None or not dominant_condition:
         return jsonify({'message': 'please fill all the fields'}), 401
-
+   
     new_summary = DailySummary(
         city_name=city_name,
         date=date,
