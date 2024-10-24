@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URI=sqlite:///app.db
+      - SMTP_SERVER=smtp.gmail.com
+      - SMTP_PORT=your_smtp_port
+      - SMTP_USERNAME=your_smtp_username
+      - SMTP_PASSWORD=your_smtp_password
+      - FROM_EMAIL=your_from_email
+      - GMAIL_PASSWORD=mwnh weit jtjo uzmm
+      - GMAIL_ID=r.tarunnayakayt@gmail.com
+      - PORT=3000
+      - EMAIL_PORT=465
+      - OPEN_WEATHER_API_KEY=0db7574d6653f4117bffd579d9b5834f
+    volumes:
+      - .:/app

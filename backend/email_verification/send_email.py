@@ -16,7 +16,8 @@ def read_html_template(template_path):
 
 def generate_verification_link(user_id):
     # Create a local verification link with user ID as query parameters
-    base_url = "http://127.0.0.1:5000"  # Assuming your app is running locally on port 5000
+    # base_url = "http://127.0.0.1:5000"  # Assuming your app is running locally on port 5000
+    base_url = "http://localhost:8000"  # Assuming your app is running locally on port 5000
     verification_link = f"{base_url}/verification/verify_email/{user_id}/verify_email"
     return verification_link
 
