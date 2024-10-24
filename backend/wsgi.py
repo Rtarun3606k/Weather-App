@@ -20,3 +20,6 @@ if __name__ == "__main__":
 # sudo docker system prune -f
 # sudo docker volume prune -f
 # sudo docker-compose up --build
+
+
+# sudo systemctl disable docker --now  
