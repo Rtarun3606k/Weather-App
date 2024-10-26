@@ -47,6 +47,7 @@ A web application to get weather updates using Flask for the backend and React V
    flask db upgrade
    ```
 
+
 5. Create .env file and add these contents
     ```txt
     GMAIL_PASSWORD=xxxx xxxx xxxx xxxx
@@ -55,7 +56,9 @@ A web application to get weather updates using Flask for the backend and React V
     SMTP_SERVER=smtp.gmail.com
     EMAIL_PORT=465 #default for gmail
     OPEN_WEATHER_API_KEY=<your open weather api key>
+    
     ```
+    Link to create app password for your gmail account https://support.google.com/mail/answer/185833?hl=en
 
 6. Setting up for docker env variables:
   ```txt
