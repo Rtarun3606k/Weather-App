@@ -96,10 +96,10 @@ const Body = () => {
         );
       });
 
-      setWeather_data(data); // Update state with fetched data
       await DailySummary(data);
-      setDaily_weather(Dailydata);
       await RealTimeSummary(data);
+      setWeather_data(data); // Update state with fetched data
+      setDaily_weather(Dailydata);
       console.log("Fetched weather data:", data); // Log the data directly after fetching
       console.log("daily Data weather data:", Dailydata); // Log the data directly after fetching
     } catch (error) {
@@ -127,9 +127,9 @@ const Body = () => {
 
   return (
     <>
-      <video autoPlay muted loop id="myVideo">
+      {/* <video autoPlay muted loop id="myVideo">
         <source src="rain.mp4" type="video/mp4" />
-      </video>
+      </video> */}
       <div className="border-red-500 max-w-full flex justify-center align-middle mb-3">
         <div
           className="flex flex-col justify-center align-middle mt-5 z-50 cursor-pointer border-1 items-center bg-transperent rounded-xl hover:translate-y-1 ease-in duration-100 px-8 box-shadow-transparent "

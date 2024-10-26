@@ -159,9 +159,6 @@ const Profile = () => {
 
   return (
     <>
-      <div className="" id="myVideo">
-        <img src="sunny.jpg" alt="" />
-      </div>
       <div
         className="flex justify-center items-center border-2 border-gray-300"
         style={{ width: "99vw", height: "85vh" }}

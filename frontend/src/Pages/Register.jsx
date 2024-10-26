@@ -46,9 +46,6 @@ const Register = () => {
 
   return (
     <>
-      <div className="" id="myVideo">
-        <img src="sunny.jpg" alt="" />
-      </div>
       <div
         className="flex flex-col justify-center align-middle mt-5 z-50 cursor-pointer border-1 items-center rounded-xl hover:translate-y-1 ease-in duration-100 "
         style={{ width: "98vw", height: "88vh" }}
