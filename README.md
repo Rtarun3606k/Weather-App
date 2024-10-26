@@ -113,11 +113,18 @@ services:
      ```sh
      cd frontend
      ```
-  2. install dependences:
+
+   2. Create .env file inside frontend dir
+    ```txt
+      VITE_OPEN_WEATHER_API_KEY=<Your api key>
+      VITE_BACKEND_URL = http://localhost:8000
+     ```
+     
+  3. install dependences:
      ```sh
      npm install
      ```
-  3. run Frontend
+  4. run Frontend
     ```sh
     npm run dev
     ```
