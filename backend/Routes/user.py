@@ -247,3 +247,17 @@ def get_daily_summary(id):
         'min_temperature': summary.min_temperature,
         'dominant_condition': summary.dominant_condition
     }), 200
+
+
+@user_route.route("/history", methods=["GET"])
+def get_history():
+    summary = DailySummary.query.all()
+
+    if not summary:
+        return jsonify({'message': 'no history found'}), 404
+
+    return jsonify({
+       
+        'daily_summary': [{'city_name': s.city_name, 'date': s.date, 'avg_temperature': s.avg_temperature, 'max_temperature': s.max_temperature, 'min_temperature': s.min_temperature, 'dominant_condition': s.dominant_condition} for s in summary]
+    }), 200
+

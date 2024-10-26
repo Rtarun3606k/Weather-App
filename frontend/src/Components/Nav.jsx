@@ -53,7 +53,7 @@ const Nav = () => {
             </li>
           </NavLink>
           <NavLink
-            to="/contact"
+            to="/history"
             className={({ isActive }) =>
               isActive
                 ? "hover:text-black text-white transition-all ease-in duration-300"
@@ -61,7 +61,7 @@ const Nav = () => {
             }
           >
             <li className="hover:text-white transition-all ease-in duration-300">
-              Contact
+              History
             </li>
           </NavLink>
           {flag ? (

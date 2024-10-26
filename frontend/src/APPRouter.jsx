@@ -5,6 +5,7 @@ import Layout from "./Pages/Layout";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
+import History from "./Pages/History";
 
 const APPRouter = () => {
   return (
@@ -16,6 +17,7 @@ const APPRouter = () => {
             <Route element={<Register />} path="register" />
             <Route element={<Login />} path="login" />
             <Route element={<Profile />} path="profile" />
+            <Route element={<History />} path="history" />
           </Route>
         </Routes>
       </Router>
