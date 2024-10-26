@@ -124,10 +124,11 @@ services:
      ```sh
      npm install
      ```
-  5. run Frontend
-    ```sh
-    npm run dev
-    ```
+  5. run Frontend:
+     ```sh
+     npm run dev
+     ```
+     
 # reminder run backend first and then frontend to avoid confusion or errors
 
 ## Project Structure
