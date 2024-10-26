@@ -10,7 +10,7 @@ services:
       - DATABASE_URI=sqlite:///app.db
       - GMAIL_PASSWORD=Your_Password
       - GMAIL_ID=your_gmail
-      - PORT=3000
+      - PORT=3000 #default
       - EMAIL_PORT=465
       - OPEN_WEATHER_API_KEY=YourAPIKEY
     volumes:
