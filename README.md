@@ -114,11 +114,11 @@ services:
      cd frontend
      ```
 
-   2. Create .env file inside frontend dir
-    ```txt
-      VITE_OPEN_WEATHER_API_KEY=<Your api key>
-      VITE_BACKEND_URL = http://localhost:8000
-     ```
+   2. Create .env file inside frontend dir:
+    ```sh
+    VITE_OPEN_WEATHER_API_KEY=<Your api key>
+    VITE_BACKEND_URL = http://localhost:8000
+    ```
      
   3. install dependences:
      ```sh
