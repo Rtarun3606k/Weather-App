@@ -2,6 +2,8 @@
 
 A web application to get weather updates using Flask for the backend and React Vite for the frontend.
 
+## video Link to install and setup application : https://drive.google.com/file/d/1Ir8HBa5kiQazFG2dwkL9aFt2GEVy0Kt9/view?usp=drive_link
+
 ## Prerequisites
 
 ### For Backend (Flask):
